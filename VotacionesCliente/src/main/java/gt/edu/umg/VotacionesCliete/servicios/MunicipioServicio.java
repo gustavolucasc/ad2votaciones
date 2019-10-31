@@ -12,29 +12,29 @@ import java.net.URLEncoder;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonSyntaxException;
-import gt.edu.umg.VotacionesCliete.dao.Departamento;
+import gt.edu.umg.VotacionesCliete.dao.Municipio;
 import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class DepartamentoServicio {
-    private static final String BASEURL="http://ad2spring:9000/departamento/";
+public class MunicipioServicio {
+    private static final String BASEURL="http://ad2spring:9000/municipio/";
     private static  ConeccionRestApi coneccionRestApi= new ConeccionRestApi();
     
     
-    public DepartamentoServicio() {
+    public MunicipioServicio() {
        
     }
           
     //Covert json string to class object
-    private static List<Departamento> toEntityDepartamentos(String jsonString)
+    private static List<Municipio> toEntityMunicipios(String jsonString)
     {
-        List<Departamento> resultado; 
+        List<Municipio> resultado; 
         try{
             Gson gson = new GsonBuilder().create();
-            Departamento[] departamentos  = gson.fromJson(jsonString, Departamento[].class);            
-            resultado = (List<Departamento>) Arrays.asList(departamentos);
+            Municipio[] municipios  = gson.fromJson(jsonString, Municipio[].class);            
+            resultado = (List<Municipio>) Arrays.asList(municipios);
         }
         catch(JsonSyntaxException ex)
         {
@@ -46,24 +46,24 @@ public class DepartamentoServicio {
      
     
     
-       public static List <Departamento> getDepartamentos() throws UnsupportedEncodingException
+       public static List <Municipio> getMunicipios() throws UnsupportedEncodingException
     {
-        String jsonResult=getDepartamentoJsonString(0);
-       List<Departamento>  departamentos;
-        departamentos=toEntityDepartamentos(jsonResult);
-        return departamentos ;
+        String jsonResult=getMunicipioJsonString(0);
+       List<Municipio>  municipios;
+        municipios=toEntityMunicipios(jsonResult);
+        return municipios ;
     }
        
    
     
        
     //Covert json string to class object
-    private static Departamento toEntity(String jsonString)
+    private static Municipio toEntity(String jsonString)
     {
         try{
             Gson gson = new GsonBuilder().create();
-            Departamento departamento = gson.fromJson(jsonString, Departamento.class);            
-            return departamento;
+            Municipio municipio = gson.fromJson(jsonString, Municipio.class);            
+            return municipio;
         }
         catch(JsonSyntaxException ex)
         {
@@ -71,23 +71,23 @@ public class DepartamentoServicio {
             return null;
         }
     }
-    public static Departamento getDepartamento(int  departamento) throws UnsupportedEncodingException
+    public static Municipio getMunicipio(int  municipio) throws UnsupportedEncodingException
     {
-        String jsonResult=getDepartamentoJsonString(departamento);
-        Departamento departamentoObject = null;
-        if (departamento !=0) departamentoObject=toEntity(jsonResult);
-        return departamentoObject;
+        String jsonResult=getMunicipioJsonString(municipio);
+        Municipio municipioObject = null;
+        if (municipio !=0) municipioObject=toEntity(jsonResult);
+        return municipioObject;
     }   
     
-    private static String getDepartamentoJsonString(int departamento) throws RuntimeException, UnsupportedEncodingException {
+    private static String getMunicipioJsonString(int municipio) throws RuntimeException, UnsupportedEncodingException {
         String resultado;
         
         //define a variable to store the weather api url and set beijing as it's default value
         String Url = BASEURL; //default value hard-coded 'beijing' 
         //should be stored in config file
 
-        if (departamento != 0) {
-            Url = BASEURL + URLEncoder.encode(Integer.toString(departamento), "utf-8");
+        if (municipio != 0) {
+            Url = BASEURL + URLEncoder.encode(Integer.toString(municipio), "utf-8");
         }
         
         resultado = coneccionRestApi.getJsonString(Url);
@@ -95,30 +95,30 @@ public class DepartamentoServicio {
         return resultado;
     }
 
-    public static String toJson (Departamento departamento){
+    public static String toJson (Municipio municipio){
        String resultado;
        
        Gson gson = new GsonBuilder().create();
        
-       resultado = gson.toJson(departamento);
+       resultado = gson.toJson(municipio);
        
        return resultado;
     }
     
-    public static void crearDepartamento(Departamento departamento){
+    public static void crearMunicipio(Municipio municipio){
         String  Url;
         String resultado;
          Url = BASEURL + "crear";
         
         String jsonInputString;
-        jsonInputString = toJson (departamento);
+        jsonInputString = toJson (municipio);
         
         try {
             resultado = coneccionRestApi.postJsonString(Url,jsonInputString);
         } catch (RuntimeException ex) {
-            Logger.getLogger(DepartamentoServicio.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MunicipioServicio.class.getName()).log(Level.SEVERE, null, ex);
         } catch (UnsupportedEncodingException ex) {
-            Logger.getLogger(DepartamentoServicio.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MunicipioServicio.class.getName()).log(Level.SEVERE, null, ex);
         }
         
     }

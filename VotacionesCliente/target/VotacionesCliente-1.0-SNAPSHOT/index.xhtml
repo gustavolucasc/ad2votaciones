@@ -6,16 +6,16 @@
     <h:head>
         <title>Facelet Title</title>
     </h:head>
-    <h:body>
+    <h:body onload="#{municipioBean.poblarMunicipios()}">
         
          <h:form>
-            <h:commandButton value="Listar" actionListener="#{departamentoBean.poblarDepartamentos()}"/>
-            <h:commandButton value="Agregar" actionListener="#{departamentoBean.agregarDepartamentoPrueba()}"/>
-            <h:dataTable value="#{departamentoBean.departamentos}" var="d" border="1" cellspacing="0">
+            <h:commandButton value="Listar" actionListener="#{municipioBean.poblarMunicipios()}"/>
+            <h:commandButton value="Agregar" actionListener="#{municipioBean.agregarMunicipioPrueba()}"/>
+            <h:dataTable value="#{municipioBean.municipios}" var="d" border="1" cellspacing="0">
         
          <h:column>
                 <f:facet name="header">ID</f:facet>
-                <h:outputLabel id="id" value="#{d.departamento}"></h:outputLabel>
+                <h:outputLabel id="id" value="#{d.municipio}"></h:outputLabel>
             </h:column>
             <h:column>
                 <f:facet name="header">NOMBRE</f:facet>
