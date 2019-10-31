@@ -6,21 +6,24 @@
     <h:head>
         <title>Facelet Title</title>
     </h:head>
-    <h:body onload="#{votanteBean.poblarVotantes()}">
+    <h:body onload="#{centroVotacionBean.poblarCentroVotacions()}">
         
          <h:form>
             
-            <h:dataTable value="#{votanteBean.votantes}" var="d" border="1" cellspacing="0">
+            <h:dataTable value="#{centroVotacionBean.centroVotacions}" var="d" border="1" cellspacing="0">
         
          <h:column>
                 <f:facet name="header">ID</f:facet>
-                <h:outputLabel id="id" value="#{d.votante}"></h:outputLabel>
+                <h:outputLabel id="id" value="#{d.centroVotacion}"></h:outputLabel>
             </h:column>
             <h:column>
                 <f:facet name="header">NOMBRE</f:facet>
-                <h:outputLabel id="name" value="#{d.nombre}"></h:outputLabel>
+                <h:outputLabel id="name" value="#{d.direccion}"></h:outputLabel>
             </h:column>
-            
+            <h:column>
+                <f:facet name="header">Municipio</f:facet>
+                <h:outputLabel id="name" value="#{d.municipio.nombre}"></h:outputLabel>
+            </h:column>
            </h:dataTable>
         </h:form>
         
